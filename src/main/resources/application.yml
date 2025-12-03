@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Memo
+  config:
+    import: security-variable.yml
+  thymeleaf:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/memo?serverTimezone=Asia/Seoul
+    username: root
+    password: ${mysql.password}
