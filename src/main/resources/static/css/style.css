@@ -1,0 +1,19 @@
+#wrap {
+    width:1200px;
+    margin: 0 auto;
+}
+
+header {
+    height:100px;
+    background-color:#dddddd;
+}
+
+.contents > .user-box {
+    width:400px;
+    background-color:#dddddd;
+}
+
+footer {
+    height:80px;
+    background-color:#dddddd;
+}
