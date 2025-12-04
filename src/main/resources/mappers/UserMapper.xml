@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mink.memo.user.repository.UserRepository">
+    <insert id="insertUser" parameterType="map">
+        INSERT INTO
+            `user`
+        (
+            `login_id`
+            ,`password`
+            , `name`
+            ,`email`
+        )
+        VALUES
+        (
+             #{loginId}
+            ,#{password}
+            ,#{name}
+            ,#{email}
+        )
+    </insert>
+</mapper>
