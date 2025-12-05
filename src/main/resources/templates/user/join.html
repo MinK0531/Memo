@@ -1,19 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/default}">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-
-    <div id="wrap">
-        <header class="d-flex align-items-center">
-            <h1 class="ml-3">Memo</h1>
-        </header>
-        <section class="contents d-flex justify-content-center">
+        <section layout:fragment="contents" class="contents d-flex justify-content-center">
             <div class="user-box my-5 p-5 rounded-lg">
                 <h2 class="text-center">회원 가입</h2>
                 <input type="text" class="form-control mt-4" placeholder="아이디" id="idInput">
@@ -24,13 +15,8 @@
                 <button type="button" class="btn btn-secondary btn-block mt-3" id="joinBtn">가입</button>
             </div>
         </section>
-        <footer class="d-flex align-items-center justify-content-center">
-            <div>Copyright 2025. marondal All rights reserved.</div>
-        </footer>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
+    <script layout:fragment="script">
         $("#joinBtn").on("click", function (){
            let id = $("#idInput").val();
            let password = $("#passwordInput").val();
@@ -77,6 +63,4 @@
         });
     </script>
 
-
-</body>
 </html>
