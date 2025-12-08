@@ -17,4 +17,39 @@
         </div>
     </section>
 
+    <script layout:fragment="script">
+        $("#loginBtn").on("click", function (){
+            let id = $("#idInput").val();
+            let password = $("#passwordInput").val();
+
+            if(id == ""){
+                alert("아이디를 입력하세요");
+                return;
+            }
+
+            if(password == ""){
+                alert("비밀번호를 입력하세요");
+                return;
+            }
+
+            $.ajax({
+                type: "post"
+                ,url:"/user/login-process"
+                ,data:{"loginId":id, "password":password}
+                ,success: function (response){
+                    if(response.result == "success"){
+                        location.href = "/memo/list";
+                    }else {
+                        alert("아이디와 비밀번호를 확인해 주세요");
+                    }
+                }
+                ,error: function (){
+                    alert("로그인 에러!");
+                }
+
+            });
+
+        });
+    </script>
+
 </html>

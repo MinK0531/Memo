@@ -2,6 +2,7 @@ package com.mink.memo.user.service;
 
 import com.mink.memo.common.MD5HashingEncoder;
 import com.mink.memo.user.repository.UserRepository;
+import com.mink.memo.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,14 @@ public class UserService {
         }else {
             return false;
         }
+
+    }
+    public User getUser(String loginId, String password){
+
+        String encodedPassword = MD5HashingEncoder.encode(password);
+
+        User user = userRepository.selectUser(loginId,encodedPassword);
+        return user;
 
     }
 }
