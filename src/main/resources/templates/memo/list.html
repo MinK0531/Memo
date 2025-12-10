@@ -5,8 +5,28 @@
       layout:decorate="~{/layouts/default}">
 
     <section layout:fragment="contents" class="contents d-flex justify-content-center">
-        <div class="contents-box bg-danger">
+        <div class="contents-box my-5">
             <h2 class="text-center">매모 리스트</h2>
+            <table class="table text-center mt-4">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>제목</th>
+                        <th>작성 날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="memo:${memoList}">
+                        <td th:text="${memo.id}">231</td>
+                        <td><a th:href="|/memo/detail?id=${memo.id}|" th:text="${memo.title}">샘플 메모 입니다</a></td>
+                        <td th:text="${#temporals.format(memo.createdAt,'yyyy-MM-dd')}">2025-04-04</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mt-3">
+                <a href="/memo/write" class="btn btn-secondary">메모 쓰기</a>
+            </div>
         </div>
 
     </section>

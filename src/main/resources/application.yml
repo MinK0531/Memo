@@ -10,6 +10,9 @@ spring:
     url: jdbc:mysql://localhost:3306/memo?serverTimezone=Asia/Seoul
     username: root
     password: ${mysql.password}
+  jpa:
+    hibernate:
+      ddl-auto: none
 mybatis:
   mapper-locations: mappers/*Mapper.xml
   configuration:
