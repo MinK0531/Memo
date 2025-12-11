@@ -12,11 +12,10 @@ header {
     width:400px;
     background-color:#dddddd;
 }
+
 .contents > .contents-box {
-    height: 500px;
     width:800px;
 }
-
 
 footer {
     height:80px;

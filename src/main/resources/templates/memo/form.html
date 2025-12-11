@@ -23,6 +23,8 @@
             let title = $("#titleInput").val();
             let contents = $("#contentsInput").val();
 
+            let file = $("#fileInput")[0].files[0];
+
             if(title ==""){
                 alert("제목을 입력하세요");
                 return;
@@ -33,18 +35,25 @@
                 return;
             }
 
+            let formData = new FormData();
+            formData.append("title",title);
+            formData.append("contents",contents);
+            formData.append("imageFile",file);
+
             $.ajax({
                 type:"post"
                 , url:"/memo/write-process"
-                , data:{"title":title,"contents":contents}
-                ,success: function (response){
+                , data:formData
+                , processData: false
+                , contentType: false
+                , success: function (response){
                     if (response.result == "success"){
                         location.href="/memo/list";
                     }else {
                         alert("메모 작성 실패!")
                     }
                 }
-                ,error:function (){
+                , error:function (){
                     alert("메모 작성 에러!")
                 }
             });
