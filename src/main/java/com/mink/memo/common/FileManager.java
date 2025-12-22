@@ -60,5 +60,28 @@ public class FileManager {
 
     }
 
+    //파일 삭제 가능
+    public static boolean removeFile(String imagePath){
+
+        if(imagePath == null){
+            return false;
+        }
+
+        // url path : /images/3_53645345834/test.png
+        String fullFilePath = FILE_UPLOAD_PATH + imagePath.replace("/images","");
+
+        Path path = Paths.get(fullFilePath);
+        Path directoryPath = path.getParent();
+
+        try {
+            Files.delete(path);
+            Files.delete(directoryPath);
+        } catch (IOException e) {
+            return false;
+        }
+
+        return  true;
+
+    }
 
 }

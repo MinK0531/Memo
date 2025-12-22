@@ -18,7 +18,7 @@ public class MemoService {
     private final MemoRepository memoRepository;
 
     //생성자가 여러개면 이렇게 하나면 AutoWird 사용 가능
-    public MemoService(MemoRepository memoRepository){
+    public MemoService(MemoRepository memoRepository) {
         this.memoRepository = memoRepository;
     }
 
@@ -26,9 +26,9 @@ public class MemoService {
             long userId,
             String title,
             String contents,
-            MultipartFile imageFile){
+            MultipartFile imageFile) {
 
-        String imagePath = FileManager.saveFile(userId,imageFile);
+        String imagePath = FileManager.saveFile(userId, imageFile);
 
 
         Memo memo = Memo.builder().
@@ -38,9 +38,9 @@ public class MemoService {
                 imagePath(imagePath).
                 build();
 
-        try{
+        try {
             memoRepository.save(memo);
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             return false;
         }
 
@@ -49,15 +49,59 @@ public class MemoService {
 
     }
 
-    public List<Memo> getMemoList(long userId){
+    public List<Memo> getMemoList(long userId) {
         return memoRepository.findByUserId(userId, Sort.by("id").descending());
     }
 
-    public Memo getMemo(long id){
-        Optional <Memo> optionalMemo = memoRepository.findById(id);
+    public Memo getMemo(long id) {
+        Optional<Memo> optionalMemo = memoRepository.findById(id);
 
         return optionalMemo.get();
 
     }
 
+    public boolean updateMemo(long id, String title, String contents) {
+        //  수정 대상 행 조회
+        // 수정 내용 적용된 객체 만들기
+        // 수절괸 객체 저장
+        Optional<Memo> optionalMemo = memoRepository.findById(id);
+
+        if (optionalMemo.isPresent()) {
+
+            Memo memo = optionalMemo.get();
+            memo = memo.toBuilder()
+                    .title(title)
+                    .contents(contents)
+                    .build();
+
+            try {
+                memoRepository.save(memo);
+            } catch (DataAccessException e) {
+                return false;
+
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean deleteMemo(long id) {
+        Optional<Memo> optionalMemo = memoRepository.findById(id);
+
+        if (optionalMemo.isPresent()) {
+
+            Memo memo = optionalMemo.get();
+            FileManager.removeFile(memo.getImagePath());
+            try {
+                memoRepository.delete(memo);
+            } catch (DataAccessException e) {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+        return true;
+    }
 }
